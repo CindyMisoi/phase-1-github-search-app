@@ -6,17 +6,18 @@ const search = document.getElementById("search");
 
 
 
-async function getUser(username) {
-    const resp = await fetch(API_URL + username);
-    const respData = await resp.json();
-    createUserCard(respData);
-    getRepos(username);
+function getUser(username) {
+    fetch(API_URL + username)
+    .then(res => res.json())
+    .then(createUserCard)
+    .then(getRepos(username))
+
 }
 
 async function getRepos(username) {
-  const resp = await fetch(API_URL + username + "/repos");
-  const respData = await resp.json();
-  addReposToCard(respData);
+    fetch(API_URL + username + "/repos")
+    .then(res => res.json())
+    .then(addReposToCard)
 }
 
 function addReposToCard(repos) {
@@ -60,4 +61,5 @@ document.getElementById('github-form').addEventListener("submit", (e) => {
   e.preventDefault();
   const user = search.value;
 getUser(user)
+//getRepos(username)
 });
