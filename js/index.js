@@ -5,7 +5,7 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 
 
-
+//fetch usernames data
 function getUser(username) {
     fetch(API_URL + username)
     .then(res => res.json())
@@ -14,12 +14,14 @@ function getUser(username) {
 
 }
 
-async function getRepos(username) {
+// fetch user repos
+function getRepos(username) {
     fetch(API_URL + username + "/repos")
     .then(res => res.json())
     .then(addReposToCard)
 }
 
+//render repos
 function addReposToCard(repos) {
   const reposEl = document.getElementById("repos");
   repos.forEach((repo) => {
@@ -32,6 +34,7 @@ function addReposToCard(repos) {
       });
 }
 
+//render users
 function createUserCard(user) {
   const cardHTML = `
       <div class="card">
